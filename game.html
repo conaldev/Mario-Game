@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Marito Game</title>
+</head>
+<body>
+<canvas id ="canvas" width = "500" height="400" tabindex="1" top="30px" style="border: 1px solid;margin: auto;display: block"></canvas>
+<script>
+    window.onload = function () {
+        setUp();
+    }
+    function setUp() {
+        const canvas = document.getElementById("canvas");
+        const context = canvas.getContext("2d");
+        context.textAlign = "center";
+        const sources = {
+            mario: "img/mario_sheet.png",
+            background: "img/background_conaldev.png",
+            enemies: "img/enemies_sheet.png",
+            items: "img/items_sheet.png",
+            helpscreen: "img/help_screen.png",
+            castle: "img/castle.png",
+            pipe_head: "img/pipe_head.png",
+            pipe_body: "img/pipe_body.png",
+        };
+
+
+    }
+</script>
+
+<script src="javascript/classCharacter.js"></script>
+</body>
+</html>
