@@ -12,6 +12,7 @@ const FLOWER_BRICK = 5;
 const FLOWER = 6;
 const GOLD = 7;
 const PIPE = 8;
+
 const Keys = {
     UP_ARROW: 38,
     DOWN_ARROW: 40,

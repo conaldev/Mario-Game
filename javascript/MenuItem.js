@@ -15,7 +15,7 @@ function MenuItem(data) {
 
     this.update = function () {};
     this.draw = function (context) {
-        context.font = "16px Arial";
+        context.font = "16px Time News Roman";
         context.textAlign = "center";
         if (this.isMouseOver)
             context.fillStyle = "rgba(255,255,255,0.7)";

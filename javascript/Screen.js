@@ -46,13 +46,13 @@ function Screen(canvas, isWelcomeScreen) {
 
         // draw title
         if (isWelcomeScreen) {
-            context.font = "24px Times New Roman"
+            context.font = "24px Times New Roman bold"
             context.fillStyle = "red";
-            context.fillText("Mario Naruto = Marito", canvas.width / 2, 40);
-            context.font = "17px Courier New";
+            context.fillText("Marito", canvas.width / 2, 40);
+            context.font = "17px Time News Roman bold";
             context.fillStyle = "yellow";
             context.fillText("Enjoy game :D", canvas.width / 2, canvas.height - 60);
-            context.font = "10px Arial";
+            context.font = "10px Time News Roman bold";
             context.fillStyle = "white";
             context.fillText("minhconal", canvas.width / 2, canvas.height - 40);
         }

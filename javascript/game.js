@@ -37,24 +37,18 @@ function Game(canvas, context) {
     function update() {
         _map.update();
         _player.handleInputs(_keyStates);
-        var ret = _player.update();
-        if (ret)
+        let result = _player.update();
+        if (result)
         {
-            var text1, text2;
+            let text1, text2;
 
-            if (ret == 1) {
-                text1 = "Game Over!";
-                text2 = "Press Enter to try again.";
+            if (result == 1) {
+                text1 = "YOU LOSE !!! :(";
+                text2 = "Enter to try again.";
             } else {
-
-                if (_map.nextLevel()) {
-                    text1 = "Level " + (_map.level + 1);
-                    text2 = "Press Enter to continue.";
-                } else {
-                    text1 = "Congratulation! You have finished the game.";
+                    text1 = "Congratulation!!! YOU WON!!! :D";
                     _map.level = 0;
-                    text2 = "Press Enter to try again.";
-                }
+                    text2 = "Enter to try again.";
             }
             clearInterval(_timer);
             _timer = null;
@@ -62,23 +56,21 @@ function Game(canvas, context) {
             context.textAlign = "center";
             context.fillStyle = "black";
             context.fillRect(0, 0, canvas.width, canvas.height);
-            context.font = "16px Arial";
-            context.fillStyle = "white";
+            context.font = "20px Time News Roman bold";
+            context.fillStyle = "yellow";
             context.fillText(text1, canvas.width / 2, top * 2);
             context.fillText("Scores : " + _map.scores, canvas.width / 2, top * 3);
             context.fillText(text2, canvas.width / 2, top * 4);
             context.textAlign = "left";
-            context.font = "10px Arial";
+            context.font = "14px Time News Roman bold";
             return;
         }
-
         draw();
-
     }
 
     function canvas_keyDown(e) {
         e.preventDefault();
-        if (e.keyCode == 13) // Enter
+        if (e.keyCode === 13) // Enter
         {
             if (!_timer) {
                 self.newGame();

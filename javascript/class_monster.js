@@ -4,32 +4,70 @@ function Monster(map, left, top) {
     Character.call(this, map, {
         left: left,
         top: top,
-        width: 20,
-        height: 20,
-        speed: 1,
-        isAutoMoving: true
+        isAutoMoving: true,
+        canJump: Math.random() >0.3,
+        spriteData: {
+            image: _images.enemies,
+            frameWidth: 29,
+            frameHeight: 29,
+            interval: 200,
+        }
     });
+    if(this.canJump) {
+        this.addSprite( {
+            name: "naruto_left",
+            startFrame: 3,
+            framesCount: 4,
+            marginTop: 4,
+            marginBottom: 10,
+            marginRight: 8
+        });
+        this.addSprite( {
+            name: "naruto_right",
+            startFrame: 7,
+            framesCount: 4,
+            marginTop: 4,
+            marginBottom: 10,
+            marginLeft: 6,
+            marginRight: 8
+        });
+    } else
+        this.addSprite({		// mushroom
+            startFrame: 0,
+            framesCount: 2,
+            marginTop: 4,
+            marginBottom: 13,
+            marginRight: 10
+        });
 }
 
 Monster.prototype = new Character();
-Monster.prototype.draw = function (context) {
-    context.save();
-    context.beginPath();
+Monster.prototype.update = function () {
+    Character.prototype.update.call(this);
 
-    let left = this.left - this.map.offsetX;
-    let top = this.top - this.map.offsetY;
+    if (this.canJump && this.speedX != 0)
+        this.setSprite(this.speedX > 0 ? "naruto_right" : "naruto_left");
 
-    let right = left + this.width;
-    let bottom = top + this.height;
+    this.collide(this.map.mushrooms);
+}
 
-    let hw = this.width / 2;   //y-coordinate
-    let cx = left + hw;
 
-    context.fillStyle = "violet";
-    context.arc(cx, top + hw, hw - 2, 0, Math.PI * 2, true);
-    context.fill();
+Monster.prototype.collide = function (mushrooms) {
 
-    context.stroke();
-    context.restore();
+    for (var i = 0; i < mushrooms.length; i++) {
+        var m = mushrooms[i];
 
+        if (!(this.left > m.right ||
+            this.right < m.left ||
+            this.top > m.bottom ||
+            this.bottom < m.top)) {
+            if (this.width < 30) {
+                this.top = this.bottom - this.height;
+                this.width = 30;
+                this.height = 30;
+
+            }
+            m.die();
+        }
+    }
 }

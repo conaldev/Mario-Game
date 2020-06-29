@@ -5,19 +5,20 @@
     <title>Marito Game</title>
 </head>
 <body>
-<canvas id ="canvas" width = "500" height="400" tabindex="1" top="30px" style="border: 1px solid;margin: auto;display: block"></canvas>
+<canvas id ="canvas" width = "600" height="500" tabindex="1" top="30px" style="border: 1px solid;margin: auto;display: block"></canvas>
 <script>
+    var audioGame = new Audio("background.mp3");
+    audioGame.play();
     window.onload = function () {
         setUp();
     }
-    let _images;
+
+    var _images;
 
     function setUp() {
-
         var canvas = document.getElementById("canvas");
         var context = canvas.getContext("2d");
         context.textAlign = "center";
-        // pre-load all needed images before starting game
         var sources = {
             mario: "img/mario_sheet.png",
             background: "img/background_conaldev.png",
@@ -30,8 +31,7 @@
         };
 
         var loader = new ImgLoader(sources,
-            function (image, percent) {	// on progressing callback
-
+            function (image, percent) {
                 context.clearRect(0, 0, canvas.width, canvas.height);
                 context.fillText("Loading: " + percent + "%", canvas.width / 2, canvas.height / 2);
             },
@@ -90,10 +90,10 @@
 <script src="javascript/class_map.js"></script>
 <script src="javascript/mapdata.js"></script>
 <script src="javascript/class_character.js"></script>
-<script src="javascript/bullet.js"></script>
+<script src="javascript/class_monster.js"></script>
 <script src="javascript/class_player.js"></script>
 <script src="javascript/class_Mushroom.js"></script>
-<script src="javascript/class_monster.js"></script>
+<script src="javascript/bullet.js"></script>
 <script src="javascript/game.js"></script>
 </body>
 </html>

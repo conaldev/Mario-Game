@@ -96,5 +96,6 @@ AnimatedSprite.prototype = {
         var sh = this.frameHeight - this.currentSprite.marginBottom;
 
         context.drawImage(this.image, sx, sy, sw, sh, this.left - mapOffsetX, this.top - mapOffsetY, this.width, this.height);
+
     }
 }
