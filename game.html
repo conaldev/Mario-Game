@@ -13,11 +13,12 @@
     let _images;
 
     function setUp() {
-        let canvas = document.getElementById("canvas");
-        let context = canvas.getContext("2d");
+
+        var canvas = document.getElementById("canvas");
+        var context = canvas.getContext("2d");
         context.textAlign = "center";
-        //load tất cả ảnh cần thiết trước khi bắt đầu game
-        let sources = {
+        // pre-load all needed images before starting game
+        var sources = {
             mario: "img/mario_sheet.png",
             background: "img/background_conaldev.png",
             enemies: "img/enemies_sheet.png",
@@ -27,33 +28,36 @@
             pipe_head: "img/pipe_head.png",
             pipe_body: "img/pipe_body.png",
         };
-        let loader = new ImgLoader(sources,
-        function (image, percent) {
 
-            context.clearRect(0, 0, canvas.clientWidth, canvas.clientHeight);
-            context.fillText("Loanding: " + percent + "%", canvas.clientWidth / 2, canvas.clientHeight / 2);
+        var loader = new ImgLoader(sources,
+            function (image, percent) {	// on progressing callback
+
+                context.clearRect(0, 0, canvas.width, canvas.height);
+                context.fillText("Loading: " + percent + "%", canvas.width / 2, canvas.height / 2);
             },
             function (images) {
+
                 _images = images;
-                let helpScreen, welcomeScreen;
+                var helpScreen, welcomeScreen;
                 helpScreen = new Screen(canvas);
                 helpScreen.beforeDraw = function (context) {
-                    context.drawImage(images.helpscreen, 0, 0, canvas.clientWidth, canvas.clientHeight);
+                    context.drawImage(images.helpscreen, 0, 0, canvas.width, canvas.height);
                 };
-                let cs = canvas.clientWidth / 2;
+                var cx = canvas.width / 2;
                 helpScreen.addItem(new MenuItem({
                     left: cx - 100,
-                    top: canvas.clientHeight - 60,
+                    top: canvas.height - 60,
                     width: 200,
                     height: 40,
                     text: "Back",
                     onclick: function () {
+                        // back to welcome screen
                         helpScreen.stop();
                         welcomeScreen.start();
                     }
                 }));
                 welcomeScreen = new Screen(canvas, true);
-                let titles = ["Play", "Help"];
+                var titles = ["Play", "Help"];
                 for (var i = 0; i < titles.length; i++) {
                     welcomeScreen.addItem(new MenuItem({
                         left: cx - 100,
@@ -65,7 +69,6 @@
                 }
                 welcomeScreen.items[0].onclick = function () {
                     welcomeScreen.stop();
-                    // start game
                     new Game(canvas, context).init();
                 };
                 welcomeScreen.items[1].onclick = function () {
@@ -74,17 +77,23 @@
                 };
                 welcomeScreen.start();
             }
-        });
+        );
+
     }
 </script>
-<script src="javascript/Screen.js"></script>
-<script src="javascript/MenuItem.js"></script>
-<script src="javascript/class_character.js"></script>
-<script src="javascript/class_monster.js"></script>
 <script src="javascript/constant_JS.js"></script>
-<script src="javascript/mapdata.js"></script>
-<script src="javascript/ImgLoader.js"></script>
-<script src="javascript/class_map.js"></script>
 <script src="javascript/AnimatedSprite.js"></script>
+<script src="javascript/StaticSprite.js"></script>
+<script src="javascript/ImgLoader.js"></script>
+<script src="javascript/MenuItem.js"></script>
+<script src="javascript/Screen.js"></script>
+<script src="javascript/class_map.js"></script>
+<script src="javascript/mapdata.js"></script>
+<script src="javascript/class_character.js"></script>
+<script src="javascript/bullet.js"></script>
+<script src="javascript/class_player.js"></script>
+<script src="javascript/class_Mushroom.js"></script>
+<script src="javascript/class_monster.js"></script>
+<script src="javascript/game.js"></script>
 </body>
 </html>

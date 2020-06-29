@@ -17,11 +17,12 @@ AnimatedSprite.prototype = {
             this.isLooping = data.isLooping;
             if (typeof this.isLooping != "boolean")
                 this.isLooping = true;
-            this.image = data.imag;
+
+            this.image = data.image;
             this.frameWidth = data.frameWidth;
             this.frameHeight = data.frameHeight || this.frameWidth;
-            this.framesPerRow = Math.floor(this.image.width / this.frameWidth)
-            this.sprites = [];
+            this.framesPerRow = Math.floor(this.image.width / this.frameWidth),
+                this.sprites = [];
             this.interval = data.interval;
 
             this.left = data.left;
@@ -31,6 +32,7 @@ AnimatedSprite.prototype = {
 
             this.onCompleted = data.onCompleted;
         }
+
     },
     addSprite: function (data) {
         this.sprites[data.name] = {
@@ -54,10 +56,12 @@ AnimatedSprite.prototype = {
     update: function () {
         if (this.isFinished)
             return;
-        let newTick = (new Data()).getTime();
-        // loop throught the frame sequence and change the currentFrame
+
+        var newTick = (new Date()).getTime();
+
         if (newTick - this.lastTick >= this.interval) {
             this.currentFrame++;
+            // reached the last frame
             if (this.currentFrame == this.currentSprite.framesCount) {
                 if (this.isLooping)
                     this.currentFrame = 0;
@@ -72,23 +76,25 @@ AnimatedSprite.prototype = {
         }
 
     },
+
     draw: function (context, mapOffsetX, mapOffsetY) {
+
         if (!mapOffsetX)
             mapOffsetX = 0;
         if (!mapOffsetY)
             mapOffsetY = 0;
+
         if (this.isFinished)
             return;
-        let realIndex = this.currentSprite.startFrame + this.currentFrame;
-        let row = Math.floor(realIndex / this.framesPerRow);
+        var realIndex = this.currentSprite.startFrame + this.currentFrame;
+        var row = Math.floor(realIndex / this.framesPerRow);
+        var col = realIndex % this.framesPerRow;
 
-        let sx = col * this.frameWidth + this.currentSprite.marginLeft;
-        let sy = row * this.frameHeight + this.currentSprite.marginTop;
-        let sw = this.frameWidth - this.currentSprite.marginRight;
-        let sh = this.frameHeight - this.currentSprite.marginBottom;
+        var sx = col * this.frameWidth + this.currentSprite.marginLeft;
+        var sy = row * this.frameHeight + this.currentSprite.marginTop;
+        var sw = this.frameWidth - this.currentSprite.marginRight;
+        var sh = this.frameHeight - this.currentSprite.marginBottom;
 
         context.drawImage(this.image, sx, sy, sw, sh, this.left - mapOffsetX, this.top - mapOffsetY, this.width, this.height);
-
     }
-
 }

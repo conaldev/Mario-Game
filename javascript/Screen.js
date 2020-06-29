@@ -25,7 +25,6 @@ function Screen(canvas, isWelcomeScreen) {
         });
     }
     this.items = [];
-    // this method/event is actived in the end of draw() method
     this.afterDraw = null;
     this.beforeDraw = null;
 
