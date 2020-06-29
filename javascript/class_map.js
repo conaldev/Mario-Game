@@ -172,7 +172,7 @@ function Map(viewWidth, viewHeight) {
         data[col + row * COLS] = 0;
         context.save();
         context.globalCompositeOperation = "destination-out";
-        context.fillStyle = "rgba(0,0,0,1)";
+        context.fillStyle = "rgb(0,0,0)";
         context.fillRect(left, top, CELL_SIZE, CELL_SIZE);
         context.restore();
     }
