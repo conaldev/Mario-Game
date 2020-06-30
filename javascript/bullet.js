@@ -32,7 +32,7 @@ Bullet.prototype.draw = function (context) {
     var hw = this.width / 2;
     var cx = left + hw;
 
-    context.fillStyle = "black";
+    context.fillStyle = "red";
     context.arc(cx, top + hw, hw - 2, 0, Math.PI * 2, true);
     context.fill();
 
